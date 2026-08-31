@@ -84,3 +84,14 @@ class QdrantStore:
         print(
             f"Inserted {len(points)} chunks into Qdrant"
         )
+
+    def search(self, query_vector, top_k=5):
+
+        results = self.client.query_points(
+            collection_name=self.collection_name,
+            query=query_vector.tolist(),
+            limit=top_k,
+            with_payload=True
+        )
+
+        return results.points
