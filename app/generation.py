@@ -1,14 +1,28 @@
-from ollama import chat
+import os
+
+from ollama import Client
 
 
 class QwenGenerator:
 
     def __init__(
         self,
-        model="qwen2.5:7b"
+        model=None
     ):
 
-        self.model = model
+        self.host = os.getenv(
+            "OLLAMA_HOST",
+            "http://localhost:11434"
+        )
+
+        self.model = model or os.getenv(
+            "OLLAMA_MODEL",
+            "qwen2.5:7b"
+        )
+
+        self.client = Client(
+            host=self.host
+        )
 
     def generate(
         self,
@@ -135,7 +149,7 @@ ANSWER
 ==================================================
 """
 
-        response = chat(
+        response = self.client.chat(
             model=self.model,
             messages=[
                 {

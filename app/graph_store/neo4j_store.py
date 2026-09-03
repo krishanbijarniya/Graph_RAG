@@ -1,3 +1,5 @@
+import os
+
 from neo4j import GraphDatabase
 
 
@@ -5,10 +7,25 @@ class Neo4jStore:
 
     def __init__(
         self,
-        uri="bolt://localhost:7687",
-        username="neo4j",
-        password="password"
+        uri=None,
+        username=None,
+        password=None
     ):
+
+        uri = uri or os.getenv(
+            "NEO4J_URI",
+            "bolt://localhost:7687"
+        )
+
+        username = username or os.getenv(
+            "NEO4J_USERNAME",
+            "neo4j"
+        )
+
+        password = password or os.getenv(
+            "NEO4J_PASSWORD",
+            "password"
+        )
 
         self.driver = GraphDatabase.driver(
             uri,

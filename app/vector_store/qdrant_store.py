@@ -1,3 +1,5 @@
+import os
+
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
     Distance,
@@ -10,10 +12,18 @@ class QdrantStore:
 
     def __init__(
         self,
-        host="localhost",
-        port=6333,
-        collection_name="research_papers"
+        host=None,
+        port=None,
+        collection_name=None
     ):
+
+        host = host or os.getenv("QDRANT_HOST", "localhost")
+        port = int(port or os.getenv("QDRANT_PORT", "6333"))
+        collection_name = (
+            collection_name
+            or os.getenv("QDRANT_COLLECTION", "research_papers")
+        )
+
         self.client = QdrantClient(
             host=host,
             port=port

@@ -1,11 +1,26 @@
 import json
-from ollama import chat
+import os
+
+from ollama import Client
 
 
 class QueryEntityExtractor:
 
-    def __init__(self, model="qwen2.5:7b"):
-        self.model = model
+    def __init__(self, model=None):
+
+        self.host = os.getenv(
+            "OLLAMA_HOST",
+            "http://localhost:11434"
+        )
+
+        self.model = model or os.getenv(
+            "OLLAMA_MODEL",
+            "qwen2.5:7b"
+        )
+
+        self.client = Client(
+            host=self.host
+        )
 
     def extract(self, query):
 
@@ -37,6 +52,12 @@ How does fine-tuning affect context windows?
 Entities:
 ["Fine-tuning", "Context Window"]
 
+Question:
+How does SelfExtend compare with Mistral?
+
+Entities:
+["SelfExtend", "Mistral"]
+
 Rules:
 
 - Return only important technical entities.
@@ -60,7 +81,7 @@ Question:
 {query}
 """
 
-        response = chat(
+        response = self.client.chat(
             model=self.model,
             messages=[
                 {
