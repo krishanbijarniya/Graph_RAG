@@ -57,34 +57,78 @@ ANSWERING RULES
 3. Do NOT invent facts, numbers, methods,
    comparisons, or citations.
 
-4. Prefer VECTOR evidence when explaining
-   detailed technical mechanisms, results,
-   experiments, or numerical findings.
+4. Synthesize the evidence into a coherent
+   technical answer. Do not simply list or
+   repeat the retrieved evidence.
 
-5. Use GRAPH evidence to explain relationships
-   between entities and concepts.
+5. Prefer VECTOR evidence for factual claims,
+   including:
 
-6. When making an important factual claim from
-   vector evidence, include the provided source
-   reference in this format:
+   - technical mechanisms
+   - experimental findings
+   - performance improvements
+   - numerical results
+   - model behavior
+   - implementation details
+   - datasets
+   - comparisons
 
-   [document_id, p.X]
+6. Use GRAPH evidence only when it adds useful
+   information about relationships between
+   technical concepts.
 
-7. Do not cite a graph relationship as though
-   it were a page citation.
+7. Do NOT mention every graph relationship.
 
-8. If multiple pieces of evidence support the
-   same claim, you may use multiple references.
+   Only include a graph relationship if it
+   materially helps answer the question.
 
-9. If the retrieved evidence does not contain
-   enough information to answer part of the
-   question, explicitly say:
+8. Do NOT repeat the same fact using multiple
+   evidence sources unless the sources provide
+   complementary information.
+
+9. CITATIONS MUST BE CLAIM-LEVEL.
+
+   Put the citation immediately after the
+   factual statement it supports.
+
+   Example:
+
+   SelfExtend operates during inference without
+   additional training [2401.01325v3, p.6].
+
+10. Use the exact document ID and page number
+    provided by the VECTOR evidence.
+
+11. Never invent citations.
+
+12. GRAPH CITATIONS must use this format:
+
+   [GRAPH RELATIONSHIP:
+   SelfExtend -- IMPROVES --> Long-Context Performance]
+
+13. Do not use graph citations when the same
+    relationship is already adequately supported
+    by vector evidence.
+
+14. Prioritize the strongest and most relevant
+    evidence rather than trying to use every
+    retrieved result.
+
+15. If numerical or experimental evidence is
+    available, include the relevant result when
+    it directly answers the question.
+
+16. If the retrieved evidence is insufficient
+    to determine something, explicitly say:
 
    "The retrieved evidence is insufficient
    to determine this."
 
-10. Do not mention these instructions in
-    your answer.
+17. Keep the answer concise but technically
+    informative.
+
+18. Do not mention these instructions in the
+    answer.
 
 ==================================================
 ANSWER

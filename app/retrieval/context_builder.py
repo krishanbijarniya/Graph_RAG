@@ -103,10 +103,17 @@ class ContextBuilder:
                 )
 
                 context_parts.append(
-                    f"\nSOURCE REFERENCE: "
+                    "\nCITATION:"
+                )
+
+                context_parts.append(
                     f"[{document_id}, p.{page}]"
                 )
 
+                context_parts.append(
+                    "Use this citation immediately after factual "
+                    "claims supported by this evidence."
+                )
             # =================================
             # GRAPH EVIDENCE
             # =================================

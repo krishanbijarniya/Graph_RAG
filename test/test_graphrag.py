@@ -44,11 +44,11 @@ def main():
     # --------------------------------
 
     print()
-    print("FINAL HYBRID EVIDENCE:")
+    print("FINAL PROCESSED EVIDENCE:")
     print("-" * 70)
 
     for i, item in enumerate(
-        result["reranked_results"],
+        result["processed_results"],
         start=1
     ):
 

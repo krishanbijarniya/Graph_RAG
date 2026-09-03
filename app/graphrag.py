@@ -45,6 +45,7 @@ class GraphRAG:
         reranked_results = results[
             "reranked_results"
         ]
+        processed_results = results["processed_results"]
 
         # --------------------------------
         # 2. Build ranked context
@@ -52,7 +53,7 @@ class GraphRAG:
 
         context = self.context_builder.build(
             query=query,
-            reranked_results=reranked_results
+            reranked_results=processed_results
         )
 
         # --------------------------------
@@ -74,5 +75,6 @@ class GraphRAG:
             "vector_results": vector_results,
             "graph_results": graph_results,
             "reranked_results": reranked_results,
+            "processed_results": processed_results,
             "context": context
         }

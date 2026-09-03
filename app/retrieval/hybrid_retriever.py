@@ -2,6 +2,7 @@ from app.retrieval.vector_retriever import VectorRetriever
 from app.retrieval.graph_retriever import GraphRetriever
 from app.retrieval.query_entity_extractor import QueryEntityExtractor
 from app.retrieval.hybrid_reranker import HybridReranker
+from app.retrieval.evidence_processor import EvidenceProcessor
 
 
 class HybridRetriever:
@@ -12,6 +13,7 @@ class HybridRetriever:
         self.graph_retriever = GraphRetriever()
         self.entity_extractor = QueryEntityExtractor()
         self.reranker = HybridReranker()
+        self.evidence_processor = EvidenceProcessor()
 
     def search(
         self,
@@ -61,9 +63,16 @@ class HybridRetriever:
             top_k=final_top_k
         )
 
+        processed_results = self.evidence_processor.process(
+            reranked_results=reranked_results,
+            top_k=8,
+            max_graph_results=3,
+            max_vector_results=5
+        )
         return {
             "vector_results": vector_results,
             "graph_results": graph_results,
             "reranked_results": reranked_results,
+            "processed_results": processed_results,
             "query_entities": entity_names
         }
